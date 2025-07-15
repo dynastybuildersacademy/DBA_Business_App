@@ -19,23 +19,23 @@ workflows:
         bundle_identifier: "com.dynastybuildersacademy.calltrackerplus"
 
     scripts:
-     - name: Print API Key env vars (test only)
-       script: |
-         echo "Key ID: $APP_STORE_CONNECT_KEY_ID"
-         echo "Issuer ID: $APP_STORE_CONNECT_ISSUER_ID"
-         echo "Private Key (first line):"
-         echo "$APP_STORE_CONNECT_PRIVATE_KEY" | cut -c -40
+      - name: print api key env vars (test only)
+        script: |
+          echo "Key ID: $APP_STORE_CONNECT_KEY_ID"
+          echo "Issuer ID: $APP_STORE_CONNECT_ISSUER_ID"
+          echo "Private Key (start):"
+          echo "$APP_STORE_CONNECT_PRIVATE_KEY" | cut -c -40
 
-      - name: Install dependencies
+      - name: install dependencies
         script: flutter pub get
 
-      - name: Run tests
+      - name: run tests
         script: flutter test
 
-      - name: Build Android (.aab)
+      - name: build android (.aab)
         script: flutter build appbundle --release --build-name=1.0.0 --build-number=1
 
-      - name: Build iOS (.ipa)
+      - name: build ios (.ipa)
         script: flutter build ipa --release --no-codesign
 
     artifacts:
